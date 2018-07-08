@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
+    <style type="text/css">
+        .wrapper{
+            width: 650px;
+            margin: 0 auto;
+        }
+        .page-header h2{
+            margin-top: 0;
+        }
+        table tr td:last-child a{
+            margin-right: 15px;
+        }
+    </style>
+    <script type="application/javascript">
+        /** After windod Load */
+        $(window).bind("load", function() {
+          window.setTimeout(function() {
+            $(".alert").fadeTo(500, 0).slideUp(500, function(){
+                $(this).remove();
+            });
+        }, 1000);
+        });
+        </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();   
+        });
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-header clearfix">
+                            <% if (messages.success) { %>                                
+                                <div class="alert alert-success">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <%= messages.success %>
+                                </div>
+                            <% } %>
+                            
+                        <h2 class="pull-left">Employees Details</h2>
+                        <a href="/" class="btn btn-success pull-right">Add New Employee</a>
+                    </div>
+                    <table class='table table-bordered table-striped'>
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Last</th>
+                                        <th>ID</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   
+                                        <% if (data) { %>
+                                            <% data.forEach(function(user){ %>
+                                                <tr>
+                                                    <td></td>
+                                                    <td><%= user.firstName %></td>
+                                                    <td><%= user.lastName %></td>
+                                                    <td><%= user.id %></td>
+                                                    <td>  
+                                                            <a href='/edit/<%= user._id %>'>Edit</a>                            
+                                                            <form method="post" action="/delete/<%= user.id %>" style="float:right">
+                                                                <input type="submit" name="delete" value='Delete' onClick="return confirm('Are you sure you want to delete?')" />
+                                                                <input type="hidden" name="_method" value="DELETE" />
+                                                            </form>
+                                                           
+
+                                                    </td>
+
+
+                                                </tr>
+                                            <% }) %>
+                                            <% } %>
+                                                                       
+                                </tbody>                           
+                            </table>
+                           
+                </div>
+            </div>        
+        </div>
+    </div>
+</body>
+</html>
