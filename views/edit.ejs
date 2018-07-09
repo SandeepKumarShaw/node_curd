@@ -22,6 +22,26 @@
             });
         }, 1000);
         });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#image_upload_preview').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $(document).ready(function(){
+        $("#inputFile").change(function () {
+         readURL(this);
+      });
+    });
+
+    
         </script>
 </head>
 <body>
@@ -39,8 +59,8 @@
                         <h2>Update Record</h2>
                         <a href="/view" class="btn btn-success pull-right">View Employee</a>
                     </div>
-                    <p>Please fill this form and submit to add employee record to the database.</p>
-                    <form action="/edit/<%=results._id%>" method="post">
+                    <div class="col-md-8">                    
+                        <form action="/edit/<%=results._id%>" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="_id" value="<%= results._id %>">
                         <div class="form-group">
                             <label>FirstName</label>
@@ -52,10 +72,20 @@
                             <input type="text" name="lastName" class="form-control" value="<%= results.lastName %>">
                             <span class="help-block"></span>
                         </div>
+                        <div class="form-group">
+                            <label>File</label>
+                            <input type="file" id="inputFile" name="photo" class="form-control">
+                            <span class="help-block"></span>
+                        </div>
                         <input type="submit" class="btn btn-primary" value="Update">
                         <input type="hidden" name="_method" value="PUT" />
 
                     </form>
+                    </div>
+                    <div class="col-md-4">
+                        <img height="200px" width="200px" id="image_upload_preview" src="/images/<%= results.photo %>" alt="your image" />
+         
+                     </div>
                 </div>
             </div>        
         </div>

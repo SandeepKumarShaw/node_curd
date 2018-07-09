@@ -6,3 +6,8 @@
     2. View using ejs template
     3. Update using ejs template
     4. Deletion using ejs template
+
+   V2.0 version released
+
+    1. File upload using multer package in mongoose db
+    2. Form curd operation with image upload

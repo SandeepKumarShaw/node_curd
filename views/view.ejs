@@ -54,9 +54,10 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>ID</th>
                                         <th>Name</th>
                                         <th>Last</th>
-                                        <th>ID</th>
+                                        <th>Image</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -66,9 +67,10 @@
                                             <% data.forEach(function(user){ %>
                                                 <tr>
                                                     <td></td>
+                                                    <td><%= user.id %></td>
                                                     <td><%= user.firstName %></td>
                                                     <td><%= user.lastName %></td>
-                                                    <td><%= user.id %></td>
+                                                    <td><img height="50px" width="50px" src=/images/<%= user.photo %>></td>
                                                     <td>  
                                                             <a href='/edit/<%= user._id %>'>Edit</a>                            
                                                             <form method="post" action="/delete/<%= user.id %>" style="float:right">
